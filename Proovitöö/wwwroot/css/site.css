@@ -14,5 +14,17 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    background-color: rgb(223, 223, 223);
+}
+
+#end {
+    background-color: rgb(63, 63, 63);
+    color: white
+}
+
+.tekst {
+    background-color: rgb(48, 48, 247);
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

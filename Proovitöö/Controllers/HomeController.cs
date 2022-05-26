@@ -18,7 +18,7 @@ namespace Proovitöö.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Eventadding()
         {
             return View();
         }
