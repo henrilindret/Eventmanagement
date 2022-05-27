@@ -1,0 +1,94 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+
+
+
+
+<div>
+    <h1>Osavõtjad</h1>
+    <p>Ürituse nimi:</p>
+
+
+
+
+</div>
+
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" checked value="option1">
+  <label class="form-check-label" for="inlineRadio1">Eraisik</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+  <label class="form-check-label" for="inlineRadio2">Ettevõte</label>
+</div>
+
+
+
+
+
+
+
+
+<form method ="post" action="/Home/addprivate">
+  <div class="container">
+
+    <label for="eesnimi"><b>Eesnimi:</b></label>
+    <input type="text" placeholder="" name="firstname" id="eesnimi" required>
+
+    <label for="perenimi"><b>Perenimi:</b></label>
+    <input type="text" placeholder="" name="surname" id="perenimi" required>
+
+    <label for="isikukood"><b>Isikukood:</b></label>
+    <input type="text" placeholder="" name="identitynumber" id="isikukood" required>
+
+    <label for="maksmisviis"><b>Maksmisviis:</b></label>
+    <input type="text" placeholder="" name="payment_type" id="maksmisviis" required>
+
+    <select name="payment_type" id="paymenttype">
+    <option value="1">Kaart</option>
+    <option value="2">Sula</option>
+  </select>
+
+
+    <label for="lisainfo"><b>lisainfo</b></label>
+    <input type="text" placeholder="" name="additionalinfo" id="lisainfo" required>
+    <hr>
+
+    <button type="submit">Tagasi</button>
+    <button type="submit" class="lisa">lisa</button>
+  </div>
+
+</form>
+
+
+
+<form method ="post" action="/Home/addcompany">
+  <div class="container">
+
+    <label for="ettevõttenimi"><b>Ettevõtte nimi:</b></label>
+    <input type="text" placeholder="" name="name" id="ettevõttenimi" required>
+
+    <label for="ettevõttenimi"><b>Ettevõtte registrikood:</b></label>
+    <input type="number" placeholder="" name="code" id="ettevõttenimi" required>
+
+    <label for="ettevõtteinimesed"><b>Ettevõttest tulevate inimeste arv:</b></label>
+    <input type="number" placeholder="" name="participants" id="ettevõtteinimesed" required>
+
+    <label for="maksmisviis"><b>Maksmisviis:</b></label>
+    <input type="text" placeholder="" name="payment_type" id="maksmisviis" required>
+
+    <label for="lisainfo"><b>lisainfo</b></label>
+    <input type="text" placeholder="" name="additionalinfo" id="lisainfo" required>
+    <hr>
+
+    <button type="submit">Tagasi</button>
+    <button type="submit" class="lisa">lisa</button>
+  </div>
+
+</form>

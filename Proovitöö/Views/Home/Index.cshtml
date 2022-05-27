@@ -1,8 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<!--Modelis oleva koodi kätte saamist HTML-is (importimine koodi faili)-->
+@model Proovitöö.Models.EventList
 
-
+<!--Loomine koha, kus on tekst, mille kõrval on pilt-->
 <div class="tekst">
     <div class="row">
         <div class="col-lg-6 align-items-center text-center d-flex">
@@ -10,6 +12,55 @@
         </div>
         <div class="col-lg-6">
             <img class="img-fluid" src="~/css/pilt.jpg">
+        </div>
+    </div>
+</div>
+
+
+
+<!--Ürituste vaatamine-->
+<div class="yritused">
+    <div class="row">
+        <div class="col-6">
+            <h1 class="pealkiri">Tulevased üritused</h1>
+            <ul class="list-group">
+                @foreach (Event e in Model.Events)
+                {
+                    <!--Andmebaasist saadud ürituse aeg on Võrdne või suurem hetkel oleva ajaga. (Tuleviku üritused)-->
+                    @if (e.eventdate >= DateTime.Now)
+                    {
+                        <!--Listi loomine, mis näitab üritusi-->
+                        <li class="list-group-item border-0">
+                            @e.eventname
+                            @e.eventdate
+                            <!--Nupud, mis viitavad kindlale toimingule. (Andmebaasist kustutamine ning ürituse info nägemine, muutmine, osalejate lisamine-->
+                            <a href="/home/deleteevent?id=@e.eventID" class="link" style="float:right;"><img src="~/css/remove.svg" alt=""></a>
+                            <a href="/home/Eventedit?id=@e.eventID" class="link" style="float:right;">OSAVÕTJAD</a>
+
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="col-6">
+            <h1 class="pealkiri">Toimunud üritused</h1>
+            <ul class="list-group">
+                @foreach (Event e in Model.Events)
+                {
+                    <!--Üritused, mis on juba toimunud (mööda läinud kuupäevad)-->
+                    @if (e.eventdate < DateTime.Now)
+                    {
+                        <li class="list-group-item border-0">
+                            @e.eventname
+                            @e.eventdate
+                            <a href="/home/deleteevent?id=@e.eventID" class="link" style="float:right;"><img src="~/css/remove.svg" alt=""></a>
+                            <a href="/home/Eventedit?id=@e.eventID" class="link" style="float:right;">OSAVÕTJAD</a>
+
+                        </li>
+                    }
+                }
+
+            </ul>
         </div>
     </div>
 </div>

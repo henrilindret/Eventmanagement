@@ -28,3 +28,22 @@ body {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+
+.yritused a {
+    color: black;
+}
+
+.formdesign {
+    background-color: white;
+    margin-top: 20px;
+}
+
+
+.list-group {
+    list-style: decimal inside;
+}
+
+.list-group-item {
+    display: list-item;
+}
