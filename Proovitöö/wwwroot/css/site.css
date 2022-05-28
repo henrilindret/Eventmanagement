@@ -29,7 +29,27 @@ body {
     margin-bottom: 20px;
 }
 
+.yritused {
+    background-color: white;
+}
 
+.pealkiri {
+    background-color:blue;
+    color:white;
+    text-align:center;
+}
+
+
+.picture {
+    height: 60px; 
+    width: 100%;
+    object-fit:fill;
+}
+
+#picturetext {
+    padding-top:13px;
+    padding-left:50px;
+}
 .yritused a {
     color: black;
 }

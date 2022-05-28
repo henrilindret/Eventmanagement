@@ -115,7 +115,7 @@ namespace Proovitöö.Controllers
         public IActionResult Eventedit(int id)
         {
             SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
-            Event e;
+            Event e = new Event("testname", DateTime.Now, "testplace", "testinfo", 0);
             Con.Open();
             var sql = "SELECT eventname, eventplace, eventdate, eventinfo FROM event WHERE eventID = @eventID";
             using (var cmd = new SqlCommand(sql, Con))
@@ -139,7 +139,50 @@ namespace Proovitöö.Controllers
                 }
             }
             Con.Close();
-            return View();
+            Con.Open();
+            List<Companycustomer> complist = new List<Companycustomer>();
+            List<Privatecustomer> privlist = new List<Privatecustomer>();
+            sql = "SELECT [yritused].[dbo].[company_customer].[ID], [yritused].[dbo].[company_customer].[name], [yritused].[dbo].[company_customer].[code], [yritused].[dbo].[company_customer].[participants], [yritused].[dbo].[company_customer].[payment_type], [yritused].[dbo].[company_customer].[additionalinfo], [yritused].[dbo].[company_customer].[EventID], [yritused].[dbo].[payment_types].[name] as Pname FROM[yritused].[dbo].[company_customer] INNER JOIN payment_types ON company_customer.payment_type = [yritused].[dbo].[payment_types].[ID] WHERE EventID = @eventid ORDER BY[yritused].[dbo].[company_customer].[ID]";
+            using (var cmd = new SqlCommand(sql, Con))
+            {
+                cmd.Parameters.AddWithValue("@eventid", id);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    int customer_id = (int)dr["ID"];
+                    string name = (string)dr["name"];
+                    long code = (long)dr["code"];
+                    int participants = (int)dr["participants"];
+                    string payment_type = (string)dr["PName"];
+                    string additionalinfo = (string)dr["additionalinfo"];
+                    var comp = new Companycustomer(customer_id, name, code, participants, payment_type, additionalinfo);
+                    complist.Add(comp);
+                }
+
+            }
+            Con.Close();
+            Con.Open();
+            sql = "SELECT [yritused].[dbo].[private_customer].[ID], [yritused].[dbo].[private_customer].[firstname], [yritused].[dbo].[private_customer].[surname], [yritused].[dbo].[private_customer].[identitynumber], [yritused].[dbo].[private_customer].[payment_type], [yritused].[dbo].[private_customer].[additionalinfo], [yritused].[dbo].[private_customer].[EventID], [yritused].[dbo].[payment_types].[name] as PName FROM[yritused].[dbo].[private_customer] INNER JOIN payment_types ON private_customer.payment_type = [yritused].[dbo].[payment_types].[ID] WHERE EventID = @eventid ORDER BY [yritused].[dbo].[private_customer].[ID]";
+            using (var cmd = new SqlCommand(sql, Con))
+            {
+                cmd.Parameters.AddWithValue("@eventid", id);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    int priv_id = (int)dr["ID"];
+                    string firstname = (string)dr["firstname"];
+                    string surname = (string)dr["surname"];
+                    long identitynumber = (long)dr["identitynumber"];
+                    string payment_type = (string)dr["PName"];
+                    string additionalinfo = (string)dr["additionalinfo"];
+                    var priv = new Privatecustomer(priv_id, firstname, surname, identitynumber, payment_type, additionalinfo);
+                   privlist.Add(priv);
+                }
+
+            }
+
+            Con.Close();
+            return View(new ParticipantsModel(e, complist, privlist));
 
         }
 

@@ -5,11 +5,11 @@
         public int ID { get; set; }
         public string firstname { get; set; }
         public string surname { get; set; }
-        public int identitynumber { get; set; }
+        public long identitynumber { get; set; }
         public string payment_type { get; set; }
         public string additionalinfo { get; set; }
 
-        public Privatecustomer(int ID, string firstname, string surname, int identitynumber, string payment_type, string additionalinfo)
+        public Privatecustomer(int ID, string firstname, string surname, long identitynumber, string payment_type, string additionalinfo)
         {
             this.ID = ID;
             this.firstname = firstname;

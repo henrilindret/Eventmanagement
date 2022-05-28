@@ -3,18 +3,32 @@
 *@
 @{
 }
-
-
+@model Proovitöö.Models.ParticipantsModel
 
 
 
 
 <div>
+
     <h1>Osavõtjad</h1>
-    <p>Ürituse nimi:</p>
+    @Model.Event.eventname
 
+    <p>Ürituse nimi</p>
+ 
+    @foreach(Companycustomer Comp in Model.Complist)
+    {
+        @Comp.name
+        <br />
+    }
+    @foreach(Privatecustomer Priv in Model.Privlist)
+    {
+        @Priv.firstname
+        <br />
+    }
+    
+   
 
-
+    
 
 </div>
 
