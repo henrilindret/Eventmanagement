@@ -4,7 +4,7 @@
 <!--Modelis oleva koodi kätte saamist HTML-is (importimine koodi faili)-->
 @model Proovitöö.Models.EventList
 
-<!--Loomine koha, kus on tekst, mille kõrval on pilt-->
+<!--Tekst, mille kõrval on pilt-->
 <div class="tekst">
     <div class="row">
         <div class="col-lg-6 align-items-center text-center d-flex">
@@ -15,8 +15,6 @@
         </div>
     </div>
 </div>
-
-
 
 <!--Ürituste vaatamine-->
 <div class="yritused">
@@ -36,7 +34,6 @@
                             <!--Nupud, mis viitavad kindlale toimingule. (Andmebaasist kustutamine ning ürituse info nägemine, muutmine, osalejate lisamine-->
                             <a href="/home/deleteevent?id=@e.eventID" class="link" style="float:right;"><img src="~/css/remove.svg" alt=""></a>
                             <a href="/home/Eventedit?id=@e.eventID" class="link" style="float:right;">OSAVÕTJAD</a>
-
                         </li>
                     }
                 }
@@ -55,11 +52,9 @@
                             @e.eventdate
                             <a href="/home/deleteevent?id=@e.eventID" class="link" style="float:right;"><img src="~/css/remove.svg" alt=""></a>
                             <a href="/home/Eventedit?id=@e.eventID" class="link" style="float:right;">OSAVÕTJAD</a>
-
                         </li>
                     }
                 }
-
             </ul>
         </div>
     </div>

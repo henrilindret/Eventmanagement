@@ -2,7 +2,6 @@
     ViewData["Title"] = "";
 }
 
-
 <div class="tekst">
     <div class="row">
         <div class="col-2 align-items-center text-align-center d-flex" id="picturetext">
@@ -15,13 +14,9 @@
 </div>
 
 
-
-
-
-
 <div class="formdesign">
-    <div class="container">
-        <form method="post" action="/Home/eventadd">
+    <form method="post" action="/Home/eventadd">
+        <div class="container">
             <div class="form-group row">
                 <label for="name" class="col-sm-2 col-form-label">Ürituse nimi:</label>
                 <div class="col-sm-3">
@@ -49,11 +44,13 @@
                 <hr>
             </div>
             <button type="submit" class="lisa">lisa</button>
-        </form>
-        <form action="/Home/Index">
-            <button type="submit">Tagasi</button>
-        </form>
-    </div>
+        </div>
+    </form>
+    <!--
+    <form action="/Home/Index">
+        <button type="submit">Tagasi</button>
+    </form>
+    -->
 </div>
 
 

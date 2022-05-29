@@ -5,104 +5,134 @@
 }
 @model Proovitöö.Models.ParticipantsModel
 
-
-
-
-<div>
-
-    <h1>Osavõtjad</h1>
-    @Model.Event.eventname
-
-    <p>Ürituse nimi</p>
- 
-    @foreach(Companycustomer Comp in Model.Complist)
-    {
-        @Comp.name
-        <br />
-    }
-    @foreach(Privatecustomer Priv in Model.Privlist)
-    {
-        @Priv.firstname
-        <br />
-    }
-    
-   
-
-    
-
+<div class="tekst">
+    <div class="row">
+        <div class="col-2 align-items-center text-align-center d-flex" id="picturetext">
+            <p>Ürituse edit</p>
+        </div>
+        <div class="col-10">
+            <img class="picture" src="~/css/libled.jpg">
+        </div>
+    </div>
 </div>
 
+<div class="taust">
+    <div>
+        <h1>Osavõtjad</h1>
+        <p>Ürituse nimi: @Model.Event.eventname</p>
+        <p>Toimumise aeg: @Model.Event.eventdate</p>
+        <p>Koht: @Model.Event.eventplace</p>
+        <!--Listi loomine osalejatele-->
+        <ul class="list-group">
+            <!--Firma ning eraisiku andmete näitamine.-->
+            @foreach (Companycustomer Comp in Model.Complist)
+            {
+                <li class="list-group-item border-0">
+                    @Comp.name
+                    @Comp.code
+                </li>
+            }
+            @foreach (Privatecustomer Priv in Model.Privlist)
+            {
+                <li class="list-group-item border-0">
+                    @Priv.firstname
+                    @Priv.surname
+                    @Priv.identitynumber
+                </li>
+            }
+        </ul>
+    </div>
 
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" checked value="option1">
-  <label class="form-check-label" for="inlineRadio1">Eraisik</label>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" checked value="option1" onclick="setform(1)">
+        <label class="form-check-label" for="inlineRadio1">Eraisik</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onclick="setform(2)">
+        <label class="form-check-label" for="inlineRadio2">Ettevõte</label>
+    </div>
+
+    <div id="formscript">
+        <div class="formdesign" id="form1">
+            <form method="post" action="/Home/addprivate">
+                <div class="form-group row">
+                    <label for="eesnimi" class="col-sm-2 col-form-label">Eesnimi:</label>
+                    <div class="col-sm-3">
+                        <input type="text" placeholder="" name="firstname" id="eesnimi" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="perenimi" class="col-sm-2 col-form-label">Perenimi:</label>
+                    <div class="col-sm-3">
+                        <input type="text" placeholder="" name="surname" id="perenimi" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="isikukood" class="col-sm-2 col-form-label">Isikukood:</label>
+                    <div class="col-sm-3">
+                        <input type="number" placeholder="" name="identitynumber" id="isikukood" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="maksmisviis" class="col-sm-2 col-form-label">Maksmisviis:</label>
+                    <div class="col-sm-3">
+                        <select name="payment_type" id="paymenttype">
+                            <option value="1">Kaart</option>
+                            <option value="2">Sula</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="lisainfo" class="col-sm-2 col-form-label">Lisainfo:</label>
+                    <div class="col-sm-3">
+                        <input type="text" placeholder="" name="additionalinfo" id="lisainfo" required>
+                    </div>
+                </div>
+                <input type="hidden" value="@Model.Event.eventID" name="EventID">
+                <button type="submit" class="lisa">lisa</button>
+
+            </form>
+
+        </div>
+
+        <div class="formdesign" id="form2">
+            <form method="post" action="/Home/addcompany">
+                <div class="form-group row">
+                    <label for="ettevõttenimi" class="col-sm-2 col-form-label">Ettevõtte nimi:</label>
+                    <div class="col-sm-3">
+                        <input type="text" placeholder="" name="name" id="ettevõttenimi" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="ettevõttekood" class="col-sm-2 col-form-label">Ettevõtte registrikood:</label>
+                    <div class="col-sm-3">
+                        <input type="number" placeholder="" name="code" id="ettevõttenimi" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="ettevõtteinimesed" class="col-sm-2 col-form-label">Ettevõttest tulevate inimeste arv:</label>
+                    <div class="col-sm-3">
+                        <input type="number" placeholder="" name="participants" id="ettevõtteinimesed" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="maksmisviis" class="col-sm-2 col-form-label">Maksmisviis:</label>
+                    <div class="col-sm-3">
+                        <select name="payment_type" id="paymenttype">
+                            <option value="1">Kaart</option>
+                            <option value="2">Sula</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="lisainfo" class="col-sm-2 col-form-label">lisainfo</label>
+                    <div class="col-sm-3">
+                        <input type="text" placeholder="" name="additionalinfo" id="lisainfo" required>
+                    </div>
+                </div>
+                <input type="hidden" value="@Model.Event.eventID" name="EventID">
+                <button type="submit" class="lisa">lisa</button>
+            </form>
+        </div>
+    </div>
 </div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-  <label class="form-check-label" for="inlineRadio2">Ettevõte</label>
-</div>
-
-
-
-
-
-
-
-
-<form method ="post" action="/Home/addprivate">
-  <div class="container">
-
-    <label for="eesnimi"><b>Eesnimi:</b></label>
-    <input type="text" placeholder="" name="firstname" id="eesnimi" required>
-
-    <label for="perenimi"><b>Perenimi:</b></label>
-    <input type="text" placeholder="" name="surname" id="perenimi" required>
-
-    <label for="isikukood"><b>Isikukood:</b></label>
-    <input type="text" placeholder="" name="identitynumber" id="isikukood" required>
-
-    <label for="maksmisviis"><b>Maksmisviis:</b></label>
-    <input type="text" placeholder="" name="payment_type" id="maksmisviis" required>
-
-    <select name="payment_type" id="paymenttype">
-    <option value="1">Kaart</option>
-    <option value="2">Sula</option>
-  </select>
-
-
-    <label for="lisainfo"><b>lisainfo</b></label>
-    <input type="text" placeholder="" name="additionalinfo" id="lisainfo" required>
-    <hr>
-
-    <button type="submit">Tagasi</button>
-    <button type="submit" class="lisa">lisa</button>
-  </div>
-
-</form>
-
-
-
-<form method ="post" action="/Home/addcompany">
-  <div class="container">
-
-    <label for="ettevõttenimi"><b>Ettevõtte nimi:</b></label>
-    <input type="text" placeholder="" name="name" id="ettevõttenimi" required>
-
-    <label for="ettevõttenimi"><b>Ettevõtte registrikood:</b></label>
-    <input type="number" placeholder="" name="code" id="ettevõttenimi" required>
-
-    <label for="ettevõtteinimesed"><b>Ettevõttest tulevate inimeste arv:</b></label>
-    <input type="number" placeholder="" name="participants" id="ettevõtteinimesed" required>
-
-    <label for="maksmisviis"><b>Maksmisviis:</b></label>
-    <input type="text" placeholder="" name="payment_type" id="maksmisviis" required>
-
-    <label for="lisainfo"><b>lisainfo</b></label>
-    <input type="text" placeholder="" name="additionalinfo" id="lisainfo" required>
-    <hr>
-
-    <button type="submit">Tagasi</button>
-    <button type="submit" class="lisa">lisa</button>
-  </div>
-
-</form>

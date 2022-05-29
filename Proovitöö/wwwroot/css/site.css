@@ -1,16 +1,16 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
@@ -34,22 +34,40 @@ body {
 }
 
 .pealkiri {
-    background-color:blue;
-    color:white;
-    text-align:center;
+    background-color: blue;
+    color: white;
+    text-align: center;
 }
 
-
 .picture {
-    height: 60px; 
+    height: 60px;
     width: 100%;
-    object-fit:fill;
+    object-fit: fill;
+}
+
+.taust {
+    background-color: white;
+    margin-top: 20px;
+}
+
+.kast {
+    display: flex;
+    flex-direction: column;
+}
+
+#form1 {
+    display: block;
+}
+
+#form2 {
+    display: none;
 }
 
 #picturetext {
-    padding-top:13px;
-    padding-left:50px;
+    padding-top: 13px;
+    padding-left: 50px;
 }
+
 .yritused a {
     color: black;
 }
