@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<div class="formdesign">
+    <form method="post" action="/Home/editprivate">
+        <div class="form-group row">
+            <label for="eesnimi" class="col-sm-2 col-form-label">Eesnimi:</label>
+            <div class="col-sm-3">
+                <input type="text" placeholder="" name="firstname" id="eesnimi" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="perenimi" class="col-sm-2 col-form-label">Perenimi:</label>
+            <div class="col-sm-3">
+                <input type="text" placeholder="" name="surname" id="perenimi" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="isikukood" class="col-sm-2 col-form-label">Isikukood:</label>
+            <div class="col-sm-3">
+                <input type="number" placeholder="" name="identitynumber" id="isikukood" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="maksmisviis" class="col-sm-2 col-form-label">Maksmisviis:</label>
+            <div class="col-sm-3">
+                <select name="payment_type" id="paymenttype">
+                    <option value="1">Kaart</option>
+                    <option value="2">Sula</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="lisainfo" class="col-sm-2 col-form-label">Lisainfo:</label>
+            <div class="col-sm-3">
+                <input type="text" placeholder="" name="additionalinfo" id="lisainfo" required>
+            </div>
+        </div>
+        <input type="hidden" value="@ViewBag.ID" name="PrivateID">
+        <input type="hidden" value="@ViewBag.pID" name="EventID">
+        <button type="submit" class="lisa">lisa</button>
+    </form>
+</div>

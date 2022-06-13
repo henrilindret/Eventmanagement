@@ -8,7 +8,7 @@
 <div class="tekst">
     <div class="row">
         <div class="col-lg-6 align-items-center text-center d-flex">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor risus vitae turpis sodales rutrum. Vivamus tincidunt tortor finibus molestie condimentum. Donec ut vestibulum massa, ut porttitor magna. Sed vel luctus purus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In id mi auctor, consectetur nisi vitae, ultricies mi. Praesent varius ac velit quis vulputate. Integer nec lectus pulvinar, consectetur orci id, lobortis erat. Proin et arcu ornare odio scelerisque hendrerit. Curabitur enim justo, iaculis dapibus erat quis, molestie vestibulum mi. Sed egestas leo non hendrerit auctor.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor risus vitae turpis sodales rutrum. Vivamus tincidunt tortor finibus molestie condimentum. Donec ut vestibulum massa, ut porttitor mag</p>
         </div>
         <div class="col-lg-6">
             <img class="img-fluid" src="~/css/pilt.jpg">
@@ -17,45 +17,53 @@
 </div>
 
 <!--Ürituste vaatamine-->
-<div class="yritused">
+<div class="container" id="link">
     <div class="row">
         <div class="col-6">
-            <h1 class="pealkiri">Tulevased üritused</h1>
-            <ul class="list-group">
-                @foreach (Event e in Model.Events)
-                {
-                    <!--Andmebaasist saadud ürituse aeg on Võrdne või suurem hetkel oleva ajaga. (Tuleviku üritused)-->
-                    @if (e.eventdate >= DateTime.Now)
+            <div class="row" id="pealkirivasak">
+                <h3>Tulevased üritused</h3>
+            </div>
+            <div class="row" id="tekstvasak">
+                <ul class="list-group">
+                    @foreach (Event e in Model.Events)
                     {
-                        <!--Listi loomine, mis näitab üritusi-->
-                        <li class="list-group-item border-0">
-                            @e.eventname
-                            @e.eventdate
-                            <!--Nupud, mis viitavad kindlale toimingule. (Andmebaasist kustutamine ning ürituse info nägemine, muutmine, osalejate lisamine-->
-                            <a href="/home/deleteevent?id=@e.eventID" class="link" style="float:right;"><img src="~/css/remove.svg" alt=""></a>
-                            <a href="/home/Eventedit?id=@e.eventID" class="link" style="float:right;">OSAVÕTJAD</a>
-                        </li>
+                        <!--Andmebaasist saadud ürituse aeg on Võrdne või suurem hetkel oleva ajaga. (Tuleviku üritused)-->
+                        @if (e.eventdate >= DateTime.Now)
+                        {
+                            <!--Listi loomine, mis näitab üritusi-->
+                            <li class="list-group-item border-0">
+                                @e.eventname
+                                @e.eventdate
+                                <!--Nupud, mis viitavad kindlale toimingule. (Andmebaasist kustutamine ning ürituse info nägemine, muutmine, osalejate lisamine-->
+                                <a href="/home/deleteevent?id=@e.eventID" class="link" style="float:right;"><img width="15px" height="20px" src="~/css/remove.svg" alt=""></a>
+                                <a href="/home/Eventedit?id=@e.eventID" class="link" style="float:right;">OSAVÕTJAD</a>
+                            </li>
+                        }
                     }
-                }
-            </ul>
+                </ul>
+            </div>
         </div>
         <div class="col-6">
-            <h1 class="pealkiri">Toimunud üritused</h1>
-            <ul class="list-group">
-                @foreach (Event e in Model.Events)
-                {
-                    <!--Üritused, mis on juba toimunud (mööda läinud kuupäevad)-->
-                    @if (e.eventdate < DateTime.Now)
+            <div class="row" id="pealkiriparem">
+                <h3>Toimunud üritused</h3>
+            </div>
+            <div class="row" id="tekstparem">
+                <ul class="list-group">
+                    @foreach (Event e in Model.Events)
                     {
-                        <li class="list-group-item border-0">
-                            @e.eventname
-                            @e.eventdate
-                            <a href="/home/deleteevent?id=@e.eventID" class="link" style="float:right;"><img src="~/css/remove.svg" alt=""></a>
-                            <a href="/home/Eventedit?id=@e.eventID" class="link" style="float:right;">OSAVÕTJAD</a>
-                        </li>
+                        <!--Üritused, mis on juba toimunud (mööda läinud kuupäevad)-->
+                        @if (e.eventdate < DateTime.Now)
+                        {
+                            <li class="list-group-item border-0">
+                                @e.eventname
+                                @e.eventdate
+                                <a href="/home/deleteevent?id=@e.eventID" class="link" style="float:right;"><img width="15px" height="20px" src="~/css/remove.svg" alt=""></a>
+                                <a href="/home/Eventedit?id=@e.eventID" class="link" style="float:right;">OSAVÕTJAD</a>
+                            </li>
+                        }
                     }
-                }
-            </ul>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

@@ -59,6 +59,60 @@ namespace Proovitöö.Controllers
             return View();
         }
 
+
+        public IActionResult Companyedit()
+        {
+            return View();
+        }
+
+        public IActionResult Privateedit(int ID)
+        {
+            ViewBag.ID = ID;
+            return View();
+        }
+
+
+
+
+        [HttpPost]
+        public IActionResult editprivate(string firstname, string surname, int identitynumber, int payment_type, string additionalinfo, int PrivateID)
+        {
+            SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
+            Con.Open();
+            var sql = "UPDATE private_customer SET firstname = @firstname, surname = @surname, identitynumber = @identitynumber, payment_type = @payment_type, additionalinfo = @additionalinfo where ID = @ID";
+            using (var cmd = new SqlCommand(sql, Con))
+            {
+                cmd.Parameters.AddWithValue("@firstname", firstname);
+                cmd.Parameters.AddWithValue("@surname", surname);
+                cmd.Parameters.AddWithValue("@identitynumber", identitynumber);
+                cmd.Parameters.AddWithValue("@payment_type", payment_type);
+                cmd.Parameters.AddWithValue("@additionalinfo", additionalinfo);
+                cmd.Parameters.AddWithValue("@ID", PrivateID);
+                cmd.ExecuteNonQuery();
+            }
+
+            Con.Close();
+            return RedirectToAction("index", "Home");
+            return RedirectToAction("Eventedit", "Home", new { id = EventID });
+        }
+
+        [HttpPost]
+        public IActionResult editcompany(int id)
+        {
+            SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
+            Con.Open();
+
+
+
+
+
+
+
+            Con.Close();
+            return View();
+        }
+
+
         [HttpPost]
         public IActionResult eventadd(string name, string place, string time, string additionalinfo)
         {
@@ -97,6 +151,44 @@ namespace Proovitöö.Controllers
             Con.Close();
             return RedirectToAction("index", "Home");
         }
+
+
+        // Eraisiku kustutamine
+        [HttpGet]
+        public IActionResult deleteprivate(string id)
+        {
+            //andmebaasiga ühenduse loomine
+            SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
+            Con.Open();
+            //andmebaasist kustutamine olenevalt antud ID-st.
+            var sql = "DELETE FROM private_customer WHERE ID = @ID";
+            using (var cmd = new SqlCommand(sql, Con))
+            {
+                cmd.Parameters.AddWithValue("@ID", id);
+                cmd.ExecuteNonQuery();
+            }
+            Con.Close();
+            return RedirectToAction("index", "Home");
+        }
+        //Ärikliendi/firma kustutamine
+        [HttpGet]
+        public IActionResult deletecompany(string id)
+        {
+            //andmebaasiga ühenduse loomine
+            SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
+            Con.Open();
+            //andmebaasist kustutamine olenevalt antud ID-st.
+            var sql = "DELETE FROM company_customer WHERE ID = @ID";
+            using (var cmd = new SqlCommand(sql, Con))
+            {
+                cmd.Parameters.AddWithValue("@ID", id);
+                cmd.ExecuteNonQuery();
+            }
+            Con.Close();
+            return RedirectToAction("index", "Home");
+        }
+
+
 
         [HttpGet]
         public IActionResult Eventedit(int id)

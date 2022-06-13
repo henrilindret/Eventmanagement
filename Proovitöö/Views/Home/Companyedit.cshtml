@@ -1,0 +1,46 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<div class="formdesign">
+    <form method="post" action="/Home/editcompany">
+        <div class="form-group row">
+            <label for="ettevõttenimi" class="col-sm-2 col-form-label">Ettevõtte nimi:</label>
+            <div class="col-sm-3">
+                <input type="text" placeholder="" name="name" id="ettevõttenimi" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="ettevõttekood" class="col-sm-2 col-form-label">Ettevõtte registrikood:</label>
+            <div class="col-sm-3">
+                <input type="number" placeholder="" name="code" id="ettevõttenimi" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="ettevõtteinimesed" class="col-sm-2 col-form-label">Ettevõttest tulevate inimeste arv:</label>
+            <div class="col-sm-3">
+                <input type="number" placeholder="" name="participants" id="ettevõtteinimesed" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="maksmisviis" class="col-sm-2 col-form-label">Maksmisviis:</label>
+            <div class="col-sm-3">
+                <select name="payment_type" id="paymenttype">
+                    <option value="1">Kaart</option>
+                    <option value="2">Sula</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="lisainfo" class="col-sm-2 col-form-label">lisainfo</label>
+            <div class="col-sm-3">
+                <input type="text" placeholder="" name="additionalinfo" id="lisainfo" required>
+            </div>
+        </div>
+        <input type="hidden" value="@Model.Companycustomer.ID" name="CompanyID">
+        <button type="submit" class="lisa">lisa</button>
+    </form>
+</div>

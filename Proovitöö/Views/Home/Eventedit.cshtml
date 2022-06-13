@@ -22,6 +22,7 @@
         <p>Ürituse nimi: @Model.Event.eventname</p>
         <p>Toimumise aeg: @Model.Event.eventdate</p>
         <p>Koht: @Model.Event.eventplace</p>
+        <p>Osavõtjad:</p>
         <!--Listi loomine osalejatele-->
         <ul class="list-group">
             <!--Firma ning eraisiku andmete näitamine.-->
@@ -30,6 +31,8 @@
                 <li class="list-group-item border-0">
                     @Comp.name
                     @Comp.code
+                    <a href="/home/deletecompany?id=@Comp.ID" class="link" style="float:right;"><img src="~/css/remove.svg" alt=""></a>
+                    <a href="/home/Companyedit?id=@Comp.ID" class="link" style="float:right;">OSAVÕTJAD</a>
                 </li>
             }
             @foreach (Privatecustomer Priv in Model.Privlist)
@@ -38,6 +41,8 @@
                     @Priv.firstname
                     @Priv.surname
                     @Priv.identitynumber
+                    <a href="/home/deleteprivate?id=@Priv.ID" class="link" style="float:right;"><img src="~/css/remove.svg" alt=""></a>
+                    <a href="/home/Privateedit?id=@Priv.ID" class="link" style="float:right;">OSAVÕTJAD</a>
                 </li>
             }
         </ul>
