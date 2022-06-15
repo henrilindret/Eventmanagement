@@ -59,23 +59,27 @@ namespace Proovitöö.Controllers
             return View();
         }
 
-
-        public IActionResult Companyedit()
-        {
-            return View();
-        }
-
-        public IActionResult Privateedit(int ID)
+        //firma/ärikliendi muutmise lehekülg/view
+        public IActionResult Companyedit(int ID, int EventID)
         {
             ViewBag.ID = ID;
+            ViewBag.EventID = EventID;
+            return View();
+        }
+
+        //eraisiku muutmise lehekülg/view
+        public IActionResult Privateedit(int ID, int EventID)
+        {
+            ViewBag.ID = ID;
+            ViewBag.EventID = EventID;
             return View();
         }
 
 
 
-
+        //Privateedit/eraisiku muutmise lehel olev form.
         [HttpPost]
-        public IActionResult editprivate(string firstname, string surname, int identitynumber, int payment_type, string additionalinfo, int PrivateID)
+        public IActionResult editprivate(string firstname, string surname, int identitynumber, int payment_type, string additionalinfo, int PrivateID, int EventID)
         {
             SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
             Con.Open();
@@ -92,24 +96,28 @@ namespace Proovitöö.Controllers
             }
 
             Con.Close();
-            return RedirectToAction("index", "Home");
             return RedirectToAction("Eventedit", "Home", new { id = EventID });
         }
 
+        //Customeredit/Firma/äriisuku muutmise lehel olev form.
         [HttpPost]
-        public IActionResult editcompany(int id)
+        public IActionResult editcompany(int ID, string name, int code, int participants, int payment_type, string additionalinfo, int CompanyID, int EventID)
         {
             SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
             Con.Open();
-
-
-
-
-
-
-
+            var sql = "UPDATE company_customer SET name = @name, code = @code, participants = @participants, payment_type = @payment_type, additionalinfo = @additionalinfo where ID = @ID";
+            using (var cmd = new SqlCommand(sql, Con))
+            {
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@code", code);
+                cmd.Parameters.AddWithValue("@participants", participants);
+                cmd.Parameters.AddWithValue("@payment_type", payment_type);
+                cmd.Parameters.AddWithValue("@additionalinfo", additionalinfo);
+                cmd.Parameters.AddWithValue("@ID", CompanyID);
+                cmd.ExecuteNonQuery();
+            }
             Con.Close();
-            return View();
+            return RedirectToAction("Eventedit", "Home", new { id = EventID });
         }
 
 
@@ -155,7 +163,7 @@ namespace Proovitöö.Controllers
 
         // Eraisiku kustutamine
         [HttpGet]
-        public IActionResult deleteprivate(string id)
+        public IActionResult deleteprivate(string id, int EventID)
         {
             //andmebaasiga ühenduse loomine
             SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
@@ -168,11 +176,11 @@ namespace Proovitöö.Controllers
                 cmd.ExecuteNonQuery();
             }
             Con.Close();
-            return RedirectToAction("index", "Home");
+            return RedirectToAction("Eventedit", "Home", new { id = EventID });
         }
         //Ärikliendi/firma kustutamine
         [HttpGet]
-        public IActionResult deletecompany(string id)
+        public IActionResult deletecompany(string id, int EventID)
         {
             //andmebaasiga ühenduse loomine
             SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
@@ -185,7 +193,7 @@ namespace Proovitöö.Controllers
                 cmd.ExecuteNonQuery();
             }
             Con.Close();
-            return RedirectToAction("index", "Home");
+            return RedirectToAction("Eventedit", "Home", new { id = EventID });
         }
 
 
