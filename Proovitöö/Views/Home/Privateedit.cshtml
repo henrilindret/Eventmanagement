@@ -18,24 +18,25 @@
 
 
 <!--Placeholderisse lisada andmebaasist info-->
+<!--Eraisiku muutmise form loomine-->
 <div class="formdesign">
     <form method="post" action="/Home/editprivate">
         <div class="form-group row">
             <label for="eesnimi" class="col-sm-2 col-form-label">Eesnimi:</label>
             <div class="col-sm-3">
-                <input type="text" placeholder="" size="23" maxlength="30" name="firstname" id="eesnimi" required>
+                <input type="text" placeholder="" size="20" maxlength="30" name="firstname" id="eesnimi" required>
             </div>
         </div>
         <div class="form-group row">
             <label for="perenimi" class="col-sm-2 col-form-label">Perenimi:</label>
             <div class="col-sm-3">
-                <input type="text" placeholder="" size="23" maxlength="30" name="surname" id="perenimi" required>
+                <input type="text" placeholder="" size="20" maxlength="30" name="surname" id="perenimi" required>
             </div>
         </div>
         <div class="form-group row">
             <label for="isikukood" class="col-sm-2 col-form-label">Isikukood:</label>
             <div class="col-sm-3">
-                <input type="number" placeholder="" size="23" maxlength="11" name="identitynumber" id="isikukood" required>
+                <input type="number" placeholder="" size="25" maxlength="11" name="identitynumber" id="isikukood" required>
             </div>
         </div>
         <div class="form-group row">
@@ -50,7 +51,7 @@
         <div class="form-group row">
             <label for="lisainfo" class="col-sm-2 col-form-label">Lisainfo:</label>
             <div class="col-sm-3">
-                <input type="text" placeholder="" size="23" maxlength="1500" name="additionalinfo" style="padding-bottom:50px;" id="lisainfo" required>
+                <input type="text" placeholder="" size="20" maxlength="1500" name="additionalinfo" style="padding-bottom:50px;" id="lisainfo" required>
             </div>
         </div>
         <input type="hidden" value="@ViewBag.ID" name="PrivateID">

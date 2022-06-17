@@ -3,6 +3,7 @@
 *@
 @{
 }
+<!--ParticipantModeli nö importimine siia faili, et saaks kätte tema sees olevat infot.-->
 @model Proovitöö.Models.ParticipantsModel
 
 <div class="tekst2">
@@ -26,11 +27,13 @@
         <!--Listi loomine osalejatele-->
         <ul class="list-group">
             <!--Firma ning eraisiku andmete näitamine.-->
+            <!--Participants model-ist andmete välja kutsumine. -->
             @foreach (Companycustomer Comp in Model.Complist)
             {
                 <li class="list-group-item border-0" id="link">
                     @Comp.name
                     @Comp.code
+                    <!--Vajutades a href lehel, võtab/saadab kaasa html-is ürituselisti ID ning ürituse ID-->
                     <a href="/home/deletecompany?id=@Comp.ID&EventID=@Model.Event.eventID" class="link" style="float:right;"><img src="~/css/remove.svg" alt=""></a>
                     <a href="/home/Companyedit?id=@Comp.ID&EventID=@Model.Event.eventID" class="link" style="float:right;">OSAVÕTJAD</a>
                 </li>
@@ -48,6 +51,9 @@
         </ul>
     </div>
 
+
+    <!--kahe nupu loomine, ning nende kontrollimine javascriptiga-->
+    <!--Kui on esimene nupp aktiivne/vajutatud, siis näitab from-i1 ja kui vajutad teist nuppu näitab form2-->
     <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" checked value="option1" onclick="setform(1)">
         <label class="form-check-label" for="inlineRadio1">Eraisik</label>

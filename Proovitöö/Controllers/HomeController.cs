@@ -15,6 +15,7 @@ namespace Proovitöö.Controllers
             _logger = logger;
         }
 
+        //datetime formaadi muutmine
         private long ConvertDatetimeToUnixTimeStamp(DateTime date)
         {
             var dateTimeOffset = new DateTimeOffset(date);
@@ -99,7 +100,7 @@ namespace Proovitöö.Controllers
             return RedirectToAction("Eventedit", "Home", new { id = EventID });
         }
 
-        //Customeredit/Firma/äriisuku muutmise lehel olev form.
+        //Customeredit/Firma/äriisiku muutmise lehel olev form.
         [HttpPost]
         public IActionResult editcompany(int ID, string name, int code, int participants, int payment_type, string additionalinfo, int CompanyID, int EventID)
         {
@@ -142,7 +143,7 @@ namespace Proovitöö.Controllers
             //Peale form-i ära saatmist, tagasi avalehele.
             return RedirectToAction("index", "Home");
         }
-
+        //Ürituse kustutamine
         [HttpGet]
         public IActionResult deleteevent(string id)
         {
@@ -176,6 +177,7 @@ namespace Proovitöö.Controllers
                 cmd.ExecuteNonQuery();
             }
             Con.Close();
+            //Suunamine tagasi ürituse edit lehele olenevalt ID-st
             return RedirectToAction("Eventedit", "Home", new { id = EventID });
         }
         //Ärikliendi/firma kustutamine
@@ -197,7 +199,7 @@ namespace Proovitöö.Controllers
         }
 
 
-
+        //ürituse info näitamine, osalejate listi loomine.
         [HttpGet]
         public IActionResult Eventedit(int id)
         {
@@ -237,6 +239,7 @@ namespace Proovitöö.Controllers
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
+                    //andmete võtmine ning nende lisamine loodud list-i
                     int customer_id = (int)dr["ID"];
                     string name = (string)dr["name"];
                     long code = (long)dr["code"];
@@ -258,6 +261,7 @@ namespace Proovitöö.Controllers
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
+                    //andmete võtmine ning nende lisamine loodud list-i
                     int priv_id = (int)dr["ID"];
                     string firstname = (string)dr["firstname"];
                     string surname = (string)dr["surname"];
