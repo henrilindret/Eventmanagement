@@ -26,7 +26,7 @@ namespace Proovitöö.Controllers
         public IActionResult Index()
         {
             //Ürituste listi loomine avalehele. Listi järjekord olenevalt ürituse ajast.
-            SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
+            SqlConnection Con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=yritused;Integrated Security=True");
             Con.Open();
             var sql = "SELECT eventname, eventplace, eventdate, eventinfo, eventID FROM event ORDER BY eventdate ASC";
             using (var cmd = new SqlCommand(sql, Con))
@@ -82,7 +82,7 @@ namespace Proovitöö.Controllers
         [HttpPost]
         public IActionResult editprivate(string firstname, string surname, int identitynumber, int payment_type, string additionalinfo, int PrivateID, int EventID)
         {
-            SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
+            SqlConnection Con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=yritused;Integrated Security=True");
             Con.Open();
             var sql = "UPDATE private_customer SET firstname = @firstname, surname = @surname, identitynumber = @identitynumber, payment_type = @payment_type, additionalinfo = @additionalinfo where ID = @ID";
             using (var cmd = new SqlCommand(sql, Con))
@@ -104,7 +104,7 @@ namespace Proovitöö.Controllers
         [HttpPost]
         public IActionResult editcompany(int ID, string name, int code, int participants, int payment_type, string additionalinfo, int CompanyID, int EventID)
         {
-            SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
+            SqlConnection Con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=yritused;Integrated Security=True");
             Con.Open();
             var sql = "UPDATE company_customer SET name = @name, code = @code, participants = @participants, payment_type = @payment_type, additionalinfo = @additionalinfo where ID = @ID";
             using (var cmd = new SqlCommand(sql, Con))
@@ -128,7 +128,7 @@ namespace Proovitöö.Controllers
             //Ürituse lisamise form-ilt saadud info edastamine andmebaasi.
             var parsedDate = DateTime.Parse(time);
             long timestamp = ConvertDatetimeToUnixTimeStamp(parsedDate);
-            SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
+            SqlConnection Con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=yritused;Integrated Security=True");
             Con.Open();
             var sql = "INSERT INTO event(eventname, eventdate, eventplace, eventinfo) VALUES(@eventname, @eventdate, @eventplace, @eventinfo)";
             using (var cmd = new SqlCommand(sql, Con))
@@ -148,7 +148,7 @@ namespace Proovitöö.Controllers
         public IActionResult deleteevent(string id)
         {
             //andmebaasiga ühenduse loomine
-            SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
+            SqlConnection Con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=yritused;Integrated Security=True");
             Con.Open();
             //andmebaasist kustutamine olenevalt antud ID-st.
             var sql = "DELETE FROM event WHERE eventID = @eventID";
@@ -167,7 +167,7 @@ namespace Proovitöö.Controllers
         public IActionResult deleteprivate(string id, int EventID)
         {
             //andmebaasiga ühenduse loomine
-            SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
+            SqlConnection Con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=yritused;Integrated Security=True");
             Con.Open();
             //andmebaasist kustutamine olenevalt antud ID-st.
             var sql = "DELETE FROM private_customer WHERE ID = @ID";
@@ -185,7 +185,7 @@ namespace Proovitöö.Controllers
         public IActionResult deletecompany(string id, int EventID)
         {
             //andmebaasiga ühenduse loomine
-            SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
+            SqlConnection Con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=yritused;Integrated Security=True");
             Con.Open();
             //andmebaasist kustutamine olenevalt antud ID-st.
             var sql = "DELETE FROM company_customer WHERE ID = @ID";
@@ -204,7 +204,7 @@ namespace Proovitöö.Controllers
         public IActionResult Eventedit(int id)
         {
             //andmebaasiga ühenduse loomine
-            SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
+            SqlConnection Con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=yritused;Integrated Security=True");
             Event e = new Event("testname", DateTime.Now, "testplace", "testinfo", 0);
             Con.Open();
             //valib tabelist andmed, mis seostuvad saadetud ID-ga
@@ -280,7 +280,7 @@ namespace Proovitöö.Controllers
         public IActionResult addprivate(string firstname, string surname, int identitynumber, int payment_type, string additionalinfo, int EventID)
         {
             //andmebaasiga ühenduse loomine
-            SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
+            SqlConnection Con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=yritused;Integrated Security=True");
             Con.Open();
             //andmebaasi html-i formist saadud andmete lisamine.
             var sql = "INSERT INTO private_customer(firstname, surname, identitynumber, payment_type, additionalinfo, EventID) VALUES(@firstname, @surname, @identitynumber, @payment_type, @additionalinfo, @EventID)";
@@ -306,7 +306,7 @@ namespace Proovitöö.Controllers
         public IActionResult addcompany(string name, int code, int participants, int payment_type, string additionalinfo, int EventID)
         {
             //andmebaasiga ühenduse loomine
-            SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-EBLLC22\SQLEXPRESS01;Initial Catalog=yritused;Integrated Security=True");
+            SqlConnection Con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=yritused;Integrated Security=True");
             Con.Open();
             //andmebaasi html-i formist saadud andmete lisamine.
             var sql = "INSERT INTO company_customer(name, code, participants, payment_type, additionalinfo, EventID) VALUES(@name, @code, @participants, @payment_type, @additionalinfo, @EventID)";
