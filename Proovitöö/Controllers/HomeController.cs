@@ -52,7 +52,12 @@ namespace Proovitöö.Controllers
                 }
             }
             Con.Close();
-            return View();
+            //Kui pole ühtegi üritust lisatud, siis näitab test üritust
+            Event ev = new Event("testüritus", DateTime.Now, "testkoht", "testinfo", 0);
+            List<Event> list = new List<Event>();
+            list.Add(ev);
+            EventList el = new EventList(list);
+            return View(el);
         }
 
         public IActionResult Eventadding()
